@@ -1,0 +1,116 @@
+include ../mixins.html.jade
+
+doctype html
+html
+	head
+		include ../head.html.jade
+	
+	body
+
+		#wrap
+
+			// Navigation
+			include ../menu.html.jade
+			
+			// Secondary
+			section#secondary
+				.jumbotron
+					.container
+						.row
+							.col-md-12
+								h1 Administration 
+									span.less company.co
+						.row
+							.col-md-12
+								ul.nav.nav-tabs
+									+tab('Default menu', '/', '2')
+									+tab('Search', '/search', '').active
+									+tab('Available positions', '/positions', '4')
+
+			// Crumble
+			section#crumble
+				.container
+					.row
+						.col-md-12
+							ol.breadcrumb
+								+crumble('Home', '/')
+								+crumble('Search', '/search')
+								+crumble('Results').active
+
+			// Search
+			section#search
+				.container
+					.row
+						.col-md-12
+							form.form-inline(role="form")
+								.row
+									.col-md-3
+										label.control-label.pull-right(for="searchbox") Search candidates
+									.col-md-5
+										center(style="margin-top:7px;")
+											- if (queries.length > 0)
+												- each query in queries
+													- if (query !== '')
+														span.label.label-default
+															= query
+															i.fa.fa-times
+									.col-md-2
+										.btn-group
+											button.btn.btn-default.disabled
+												i.fa.fa-list
+											button.btn.btn-default
+												i.fa.fa-user
+
+			section#search
+				.container
+					.row
+						.col-md-12
+							table.table.table-striped.table-responsive
+								- each item in collection
+									- var x = Math.random() * 100;
+									tr
+										td
+											img(src="http://disqus.com/api/users/avatars/" + item.name.split(' ')[0] + ".jpg", width="50", height="50", style="border-radius:50%")
+										td(style="vertical-align: middle")
+											a(href="results/" + item.name, data-bypass="true")
+												= item.name
+											br
+											span(style="font-size:.7em;color:#CCC;")
+												= item.phone 
+												|  / 
+												= item.company.name
+										td(style="vertical-align: middle")
+											i.fa.fa-map-marker(style="margin-right: 8px;")
+											= item.address.city
+										td(style="vertical-align: middle;")
+											.progress.progress-striped(style="width:200px;margin:auto 0;")
+												.progress-bar(role="progressbar", aria-valuenow="60", aria-valuemin="0", aria-valuemax="100", style="width:" + x + "%")
+										td(style="vertical-align: middle")
+											button.btn.btn-default.pull-right Invite
+
+					.row
+						.col-md-12
+							.row
+								.col-md-4.col-md-offset-4
+									center
+										ul.pagination(style="margin:0")
+											li.disabled
+												a(href="#") &laquo;
+											li.active
+												a(href="#") 1
+											li
+												a(href="#") 2
+											li
+												a(href="#") 3
+											li
+												a(href="#") 4
+											li
+												a(href="#") &raquo;
+								.col-md-4
+									button.btn.btn-default.pull-right(role="button") Compare
+							.row
+								.col-md-12
+									&nbsp;
+
+		// Footer
+		include ../footer.html.jade

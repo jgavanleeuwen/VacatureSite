@@ -1,0 +1,108 @@
+include ../mixins.html.jade
+include mixins/mixins.html.jade
+
+doctype html
+html
+	head
+		include ../head.html.jade
+		script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUsPjG5jmbXA1LflkAOCuONhtyuLmXUaI&sensor=true", type="text/javascript")
+		script.
+			var model = !{JSON.stringify(position, undefined, 2)};
+
+	body
+
+		#wrap
+
+			// Navigation
+			include ../menu.html.jade
+			
+			// Secondary
+			section#secondary
+				.jumbotron
+					.container
+						.row
+							.col-md-12
+								h1 Administration 
+									span.less company.co
+						.row
+							.col-md-12
+								ul.nav.nav-tabs
+									+tab('Default menu', '/', '2')
+									+tab('Search', '/search', '')
+									+tab('Available positions', '/positions', '4').active
+
+			// Crumble
+			section#crumble
+				.container
+					.row
+						.col-md-12
+							ol.breadcrumb
+								+crumble('Home', '/')
+								+crumble('Positions', '/positions')
+								+crumble(position.name).active
+
+			// Rest
+			section#position
+				.container
+					.row
+						.col-md-1
+							a(href="", data-bypass="true")
+								i.fa.fa-angle-left.pager
+						.col-md-1
+							.logo(style="width:75px;height:75px;border-radius:50%;overflow:hidden;background:url(" + position.company.logo + ") center center; background-size: cover")
+						.col-md-9
+							h3(style="margin:15px 0 0 0")= position.name
+							span at 
+								a(href="/companies/" + position.company.id, data-bypass="true", style="color:#AAA")= position.company.name
+						.col-md-1
+							a(href="", data-bypass="true")
+								i.fa.fa-angle-right.pager.pull-right
+					hr
+					.row
+						.col-md-7.col-md-offset-1
+							.row
+								.col-md-12
+									p
+										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed justo ac tellus vestibulum consectetur id a nulla. Integer rutrum dignissim mollis. Aliquam tempor euismod porta. Praesent vitae ultrices sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti. Nunc risus lacus, aliquet eu libero ac, egestas laoreet massa.
+									br
+									p.muted
+										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed justo ac tellus vestibulum consectetur id a nulla. Integer rutrum dignissim mollis. Aliquam tempor euismod porta. Praesent vitae ultrices sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti. Nunc risus lacus, aliquet eu libero ac, egestas laoreet massa.
+									br
+									p.muted
+										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed justo ac tellus vestibulum consectetur id a nulla. Integer rutrum dignissim mollis. Aliquam tempor euismod porta. Praesent vitae ultrices sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti. Nunc risus lacus, aliquet eu libero ac, egestas laoreet massa.
+							.row
+								.col-md-12
+									| &nbsp;
+							.row
+								.col-md-12
+									#map.noprint(style="page-break-before: always")
+									p
+										span#duration
+									#directions
+									hr
+							.row.noprint
+								.col-md-12
+									button.btn.pull-right.btn-danger(data-toggle="modal", data-target="#modal") Delete
+									a.btn.pull-right(href=position.id + "/edit", data-bypass="true") Edit
+						.col-md-3.col-md-offset-1.noprint
+							.well.sub
+								+iconname('Activities', 'signal', position.id + '/activities')
+								+iconname('Messages', 'comment', position.id + '/messages')
+								.row
+									.col-md-1.col-md-offset-1
+										i(class="fa fa-fw fa-print")
+									.col-md-9
+										a(href="#", data-bypass="true", data-toggle="modal", data-target="#modal_print") Print this
+							.well.attachments
+								+attachment('c_vitae.pdf', '')
+								+attachment('portfolio.pdf', '')
+					.row
+						.col-md-12
+							| &nbsp;
+
+		// Footer
+		include ../footer.html.jade
+
+		// Modal
+		include mixins/modal.html.jade
+		include ../modal.html.jade

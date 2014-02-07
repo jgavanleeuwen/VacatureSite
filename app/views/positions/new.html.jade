@@ -1,0 +1,111 @@
+include ../mixins.html.jade
+
+doctype html
+html
+	head
+		include ../head.html.jade
+	
+	body
+
+		#wrap
+
+			// Navigation
+			include ../menu.html.jade
+			
+			// Secondary
+			section#secondary
+				.jumbotron
+					.container
+						.row
+							.col-md-12
+								h1 Administration 
+									span.less company.co
+						.row
+							.col-md-12
+								ul.nav.nav-tabs
+									+tab('Default menu', '/', '2')
+									+tab('Search', '/search', '')
+									+tab('Available positions', '/positions', '4').active
+
+			// Crumble
+			section#crumble
+				.container
+					.row
+						.col-md-12
+							ol.breadcrumb
+								+crumble('Home', '/')
+								+crumble('Positions', '/positions')
+								+crumble('New').active
+
+			section#search
+				.container
+					.row
+						.col-md-12
+							.alert.alert-warning.alert-dismissable
+								button.close(data-dismiss="alert") &times;
+								strong Warning! 
+								| Fill in the form below
+					.row
+						&nbsp;
+					.row
+						.col-md-12
+							center
+								ul.nav.nav-pills.steps
+									li.active
+										a(href="#first", data-toggle="tab", data-bypass="true") 1. First settings
+									li 
+										i.fa.fa-angle-right
+									li
+										a(href="#second", data-toggle="tab", data-bypass="true") 2. Second settings
+									li 
+										i.fa.fa-angle-right
+									li
+										a(href="#third", data-toggle="tab", data-bypass="true") 3. Third
+							hr
+					.row
+						form.form-horizontal(role="form", method="POST", action="/positions")
+							.col-md-10.tab-content
+								#first.tab-pane.active
+									.form-group
+										label.col-sm-3.control-label Name
+										.col-sm-9
+											input.form-control(name="name", placeholder="Name of the position")
+									.form-group
+										label.col-sm-3.control-label Logo
+										.col-sm-6
+											#droparea.droparea
+												span Drop logo here
+									.form-group
+										.col-sm-3
+											label.control-label.pull-right Description
+											p.info Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+										.col-sm-9
+											textarea#textarea.form-control(rows="4", name="desc")
+												span Type a short description here..
+									.form-group
+										label.col-sm-3.control-label Location
+										.col-sm-9
+											input.form-control(name="location", placeholder="Location", style="width:400px;")
+
+
+								#second.tab-pane
+									.form-group
+										label.col-sm-3.control-label Locatie
+										.col-sm-9
+
+								#third.tab-pane
+
+								
+							.col-md-2
+								.right.pull-right
+									a.btn(href="", data-bypass="true", data-toggle="modal", data-target="#modal") Preview
+									input.btn.btn-primary(role="button", type="submit", value="Save")
+
+
+
+
+
+
+
+		// Footer
+		include ../footer.html.jade

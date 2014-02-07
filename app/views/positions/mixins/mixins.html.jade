@@ -1,0 +1,20 @@
+mixin social(platform, href)
+	.row
+		.col-md-1.col-md-offset-1
+			i(class="fa fa-fw fa-" + platform.toLowerCase())
+		.col-md-9
+			a(href="" + href) #{platform}
+
+mixin attachment(name, href)
+	.row
+		.col-md-1.col-md-offset-1
+			i.fa.fa-paperclip
+		.col-md-9
+			a(href="" + href) #{name}
+
+mixin iconname(name, icon, href)
+	.row
+		.col-md-1.col-md-offset-1
+			i(class="fa fa-fw fa-" + icon.toLowerCase())
+		.col-md-9
+			a(href="" + href, data-bypass="true")= name

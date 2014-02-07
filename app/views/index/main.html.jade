@@ -1,0 +1,54 @@
+include ../mixins.html.jade
+
+doctype html
+html
+	head
+		include ../head.html.jade
+	
+	body
+
+		#wrap
+
+			// Navigation
+			include ../menu.html.jade
+			
+			// Secondary
+			section#secondary
+				.jumbotron
+					.container
+						.row
+							.col-md-12
+								h1 Administration 
+									span.less company.co
+						.row
+							.col-md-12
+								+tabmenu('/')
+
+			// Crumble
+			section#crumble
+				.container
+					.row
+						.col-md-12
+							ol.breadcrumb
+								+crumble('Home', '/')
+								+crumble('Default menu').active
+
+			// Dash me
+			section#dashboard
+				.container
+					.row
+						.col-md-1.item
+							i.fa.fa-2x.fa-user
+							span Account
+						.col-md-1.item
+							i.fa.fa-2x.fa-envelope
+							span Messages
+						.col-md-1.item
+							i.fa.fa-2x.fa-comments-o
+							span Chat
+						.col-md-1.item
+							i.fa.fa-2x.fa-building
+							span Company
+							span.badge 1
+
+		include ../footer.html.jade

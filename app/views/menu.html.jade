@@ -1,0 +1,45 @@
+.navbar.navbar-static-top
+			.container
+				.navbar-header
+					button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					h2 
+						img(src="/images/logo.png", width="36")
+						|  Logotype
+				.navbar-collapse.collapse.pull-right
+					- if (!user)
+						.btn-group
+							a.btn.btn-default(href="/login", data-bypass="true") 
+								| Login
+					- else 
+						- if (typeof user.company === "object")
+							.btn-group
+								button.btn.btn-default(type="button")= user.company.name 
+								button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown") 
+									span.caret
+								ul.dropdown-menu(role="menu")
+									li
+										a(href="#backend") Settings
+									li
+										a(href="#frontend") Messages
+											span.badge.pull-right 3
+									li.divider
+									li
+										a(href="#frameworks") Logout
+						.btn-group
+							button.btn.btn-default(type="button") 
+								i.fa.fa-user
+								= user.displayName
+							button.btn.btn-default.dropdown-toggle(type="button", data-toggle="dropdown") 
+								span.caret
+							ul.dropdown-menu(role="menu")
+								li
+									a(href="#backend") Settings
+								li
+									a(href="#frontend") Messages
+										span.badge.pull-right 3
+								li.divider
+								li
+									a(href="/logout", data-bypass="true") Logout

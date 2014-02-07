@@ -1,0 +1,28 @@
+mixin tabmenu(active)
+	ul.nav.nav-tabs
+		+tab('Default menu', '/', '2').active
+		+tab('Search', '/search', '')
+		+tab('Available positions', '/positions', '4')
+		+tab('Messages', '/messages')
+
+mixin tab(name, href, badge)
+	li(class=attributes.class)
+		a(href= href, data-bypass="true")= name
+			span.badge= badge
+
+mixin crumble(name, href)
+	li(class=attributes.class)
+		- if (href)
+			a(href= href, data-bypass="true")= name
+		- else
+			span= name
+
+mixin feedback( message )
+	.container
+		.row
+			.col-md-12
+				- each item in message
+					.alert.alert-success.alert-dismissable
+						button.close(data-dismiss="alert") &times;
+						strong Warning!  
+						| Edit was successfully

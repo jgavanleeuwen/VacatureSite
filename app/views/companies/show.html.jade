@@ -1,0 +1,64 @@
+include ../mixins.html.jade
+
+doctype html
+html
+	head
+		include ../head.html.jade
+	
+	body
+
+		#wrap
+
+			// Navigation
+			include ../menu.html.jade
+			
+			// Secondary
+			section#secondary
+				.jumbotron
+					.container
+						.row
+							.col-md-12
+								h1 Administration 
+									span.less company.co
+						.row
+							.col-md-12
+								ul.nav.nav-tabs
+									+tab('Default menu', '/', '2')
+									+tab('Search', '/search', '').active
+									+tab('Available positions', '/positions', '4')
+
+			// Crumble
+			section#crumble
+				.container
+					.row
+						.col-md-12
+							ol.breadcrumb
+								+crumble('Home', '/')
+								+crumble('Search', '/search')
+								+crumble('Companies', '/search/companies')
+								+crumble(company.name).active
+
+			// Person
+			section#head
+				.container
+					.row
+						.col-md-1.col-md-offset-1
+							.logo(style="width:75px;height:75px;border-radius:50%;overflow:hidden;background:url(" + company.logo + ") center center; background-size: cover")
+						.col-md-4
+							h3(style="margin:15px 0 0 0")= company.name
+							span(style="color:#AAA") Just Do It
+					hr
+					.row
+						.col-md-7.col-md-offset-1
+							.row
+								.col-md-12
+									p
+										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed justo ac tellus vestibulum consectetur id a nulla. Integer rutrum dignissim mollis. Aliquam tempor euismod porta. Praesent vitae ultrices sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti. Nunc risus lacus, aliquet eu libero ac, egestas laoreet massa.
+									br
+									p.muted
+										| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed justo ac tellus vestibulum consectetur id a nulla. Integer rutrum dignissim mollis. Aliquam tempor euismod porta. Praesent vitae ultrices sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti. Nunc risus lacus, aliquet eu libero ac, egestas laoreet massa.
+
+
+
+		// Footer
+		include ../footer.html.jade

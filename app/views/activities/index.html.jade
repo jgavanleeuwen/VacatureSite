@@ -1,0 +1,75 @@
+include ../mixins.html.jade
+
+doctype html
+html
+	head
+		include ../head.html.jade
+
+		// Prefetch
+		script.
+			var data = !{JSON.stringify(output, undefined, 2)};
+	
+	body
+
+		#wrap
+
+			// Navigation
+			include ../menu.html.jade
+			
+			// Secondary
+			section#secondary
+				.jumbotron
+					.container
+						.row
+							.col-md-12
+								h1 Administration 
+									span.less company.co
+						.row
+							.col-md-12
+								ul.nav.nav-tabs
+									+tab('Default menu', '/', '2')
+									+tab('Search', '/search', '')
+									+tab('Available positions', '/positions', '4').active
+
+			// Crumble
+			section#crumble
+				.container
+					.row
+						.col-md-12
+							ol.breadcrumb
+								+crumble('Home', '/')
+								+crumble('Positions', '/positions')
+								+crumble(parent.name, parent.url)
+								+crumble('Activities').active
+			
+			// Rest
+			section#position
+				.container
+					.row
+						.col-md-4.col-md-offset-1
+							h3(style="margin:15px 0 0 0")= parent.name
+							span(style="color:#AAA") A new idea
+					hr
+
+			section#search
+				.container
+					.row
+						.col-md-8
+							#graph
+					.row
+						.col-md-12 &nbsp;
+					.row
+						.col-md-12
+							table.table.table-responsive
+								- each item in activities
+									tr
+										td(style="vertical-align: middle;")
+											img(src="http://disqus.com/api/users/avatars/jeroen.jpg", width="40", height="40", style="border-radius:50%")
+										td(style="vertical-align: middle;")
+											| #{item.initiator.displayName} 
+											strong= item.event.type + "ed this on "
+											| #{item.date}
+					.row
+						.col-md-12
+							center
+								button#loadmore.btn.btn-default(role="button") Load more

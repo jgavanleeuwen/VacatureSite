@@ -1,0 +1,9 @@
+# 3rd
+public/js/application/text.js
+public/js/application/json.js
+public/js/libs/**/*.js
+public/js/plugins/**/*.js
+
+
+# Temp
+app/lib/mailer.js

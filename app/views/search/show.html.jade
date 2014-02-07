@@ -1,0 +1,58 @@
+include ../mixins.html.jade
+
+doctype html
+html
+	head
+		include ../head.html.jade
+	
+	body
+
+		#wrap
+
+			// Navigation
+			include ../menu.html.jade
+			
+			// Secondary
+			section#secondary
+				.jumbotron
+					.container
+						.row
+							.col-md-12
+								h1 Administration 
+									span.less company.co
+						.row
+							.col-md-12
+								ul.nav.nav-tabs
+									+tab('Default menu', '/', '2')
+									+tab('Search', '/search', '').active
+									+tab('Available positions', '/positions', '4')
+
+
+			// Crumble
+			section#crumble
+				.container
+					.row
+						.col-md-12
+							ol.breadcrumb
+								+crumble('Home', '/')
+								+crumble('Search').active
+
+			// Search
+			section#search
+				.container
+					.row
+						.col-md-12
+							form.form-inline(role="form", action="search/results", method="GET")
+								.row
+									.col-md-3
+										label.control-label.pull-right(for="searchbox") Search candidates
+									.col-md-5
+										input.form-control(type="text", name="query", style="width:400px", placeholder="Type your query..")
+										button.btn.pull-right(type="submit") Go
+									.col-md-2
+										a.btn(href="search") Show more options 
+							hr
+
+
+		// Footer
+		include ../footer.html.jade

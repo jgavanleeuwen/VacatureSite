@@ -1,0 +1,99 @@
+include ../mixins.html.jade
+
+doctype html
+html
+	head
+		include ../head.html.jade
+		script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUsPjG5jmbXA1LflkAOCuONhtyuLmXUaI&sensor=true", type="text/javascript")
+		script.
+			var collection = !{JSON.stringify(positions, undefined, 2)};
+
+	
+	body
+
+		#wrap
+
+			// Navigation
+			include ../menu.html.jade
+			
+			// Secondary
+			section#secondary
+				.jumbotron
+					.container
+						.row
+							.col-md-12
+								h1 Administration 
+									span.less company.co
+						.row
+							.col-md-12
+								ul.nav.nav-tabs
+									+tab('Default menu', '/', '2')
+									+tab('Search', '/search', '')
+									+tab('Available positions', '/positions', '4').active
+
+			// Crumble
+			section#crumble
+				.container
+					.row
+						.col-md-12
+							ol.breadcrumb
+								+crumble('Home', '/')
+								+crumble('Positions').active
+
+			- if( message )
+				+feedback( message )
+
+			// Search
+			section#search
+				.container
+					.row
+						.col-md-12
+							form.form-inline(role="form")
+								.row
+									.col-md-3
+										label.control-label.pull-right(for="searchbox") Positions overview
+									.col-md-8
+										ul.btn-group.pull-right.nav
+											a.btn.btn-default.active(href="#list", data-toggle="tab", data-bypass="true")
+												i.fa.fa-list
+											a.btn.btn-default(href="#gallery", data-toggle="tab", data-bypass="true")
+												i.fa.fa-align-center
+											a#mapview.btn.btn-default(href="#map", data-toggle="tab", data-bypass="true")
+												i.fa.fa-map-marker
+
+			section#search
+				.container
+					.row
+						.col-md-12.tab-content
+							#list.tab-pane.active
+								table.table.table-striped.table-responsive
+									- each item in positions
+										tr
+											td(style="vertical-align: middle")
+												a(href="positions/" + item._id, data-bypass="true")
+													= item.name
+												br
+												span(style="font-size:.7em;color:#666;") at  
+													a(data-bypass="true", href="/companies/" + item.company._id, style="color: #666; font-size:inherit; text-decoration: underline")= item.company.name
+											td(style="vertical-align: middle")
+												i.fa.fa-map-marker(style="margin-right: 8px;")
+												= item.location
+											td(style="vertical-align: middle;")
+												.progress.progress-striped(data-toggle="tooltip", title=item.level, style="width:200px;margin:auto 0;")
+													.progress-bar(role="progressbar", aria-valuenow="60", aria-valuemin="0", aria-valuemax="100", style="width:" + (item.level * 100) + "%")
+							#gallery.tab-pane
+								| MAP
+							#map.tab-pane
+								#mapper(style="height: 300px;width:100%")
+					.row
+						.col-md-4.col-md-offset-8
+							- if (user )
+								a.btn.btn-primary.pull-right(role="button", href="/positions/new", data-bypass="true") Add
+					.row
+						.col-md-12
+							&nbsp;
+
+
+
+		// Footer
+		include ../footer.html.jade

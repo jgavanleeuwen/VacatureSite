@@ -1,0 +1,30 @@
+#modal_print.modal.fade.in(tabindex="1", role="dialog", aria-hidden="true")
+	.modal-dialog
+		.modal-content
+			.modal-header.clearfix
+				button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+			.modal-body
+				.span(style="margin: 0 0 0 10px;display: block")
+					| Which parts do you want to print?
+				form#printsettings.form.clearfix
+					.form-group
+						.col-sm-10
+							.checkbox
+								label(style="font-size:1em;")
+									input(type="checkbox", name="position" disabled, checked)
+									| Position
+					.form-group
+						.col-sm-10
+							.checkbox
+								label(style="font-size:1em;")
+									input(type="checkbox", name="messages")
+									| Messages
+					.form-group
+						.col-sm-10
+							.checkbox
+								label(style="font-size:1em;")
+									input(type="checkbox", name="directions")
+									| Directions
+			.modal-footer
+				button.btn(data-dismiss="modal") Cancel
+				button#print.btn.btn-success(type="submit", data-dismiss="modal") Print
